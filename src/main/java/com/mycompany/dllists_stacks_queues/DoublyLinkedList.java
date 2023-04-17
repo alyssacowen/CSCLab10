@@ -9,21 +9,25 @@ class Node {
    public int data;
    public Node next;
    public Node previous;
+   
 
    public Node(int initialData) {
       data = initialData;
       next = null;
       previous = null;
+      
    }
 }
 
 public class DoublyLinkedList {
    private Node head;
    private Node tail;
+   private int size;
     
    public DoublyLinkedList() {
       head = null;
       tail = null;
+      size = 0;
    }
     
    public void append(Node newNode) {
@@ -36,6 +40,7 @@ public class DoublyLinkedList {
          newNode.previous = tail;
          tail = newNode;
       }
+      size++;
    }
    
    public void prepend(Node newNode) {
@@ -47,7 +52,9 @@ public class DoublyLinkedList {
          newNode.next = head;
          head.previous = newNode;
          head = newNode;
+         
       }
+     size++;
    }
    
    public void printList() {
@@ -58,7 +65,14 @@ public class DoublyLinkedList {
       }
       System.out.println();
    }
-   
+   public void printRevList(){
+       Node node = tail;
+       while(node != null){
+           System.out.println(node.data + " ");
+           node =node.previous;
+       }
+       System.out.println();
+   }
    public void insertAfter(Node currentNode, Node newNode) {
       if (head == null) {
          head = newNode;
@@ -75,10 +89,15 @@ public class DoublyLinkedList {
          newNode.previous = currentNode;
          currentNode.next = newNode;
          successor.previous = newNode;
+         
       }
+      size++;
    }
    
    public void remove(Node currentNode) {
+       if (head==null){
+           return;
+       }
       Node successor = currentNode.next;
       Node predecessor = currentNode.previous;
       
@@ -93,5 +112,80 @@ public class DoublyLinkedList {
          
       if (currentNode == tail)
          tail = predecessor;
+     size--;
    }
+   public int[] toArray(){//space and time O(n)
+      int[] arr = new int [size];
+      int index = 0;
+       Node current = head;
+       while (current != null){
+           arr[index++] = current.data;
+           current = current.next;
+       }
+    return arr;
+
+   }
+   public int indexOf(int x){ //space O(1) time O(n)
+      int index = 0;
+       Node current = head;
+       while (current != null){
+           if(x==current.data)
+               return index;
+           current = current.next;
+           index++;
+       }
+    return -1;
+   }
+   public int sum(int x){
+       Node node = tail;
+       int sum = 0;
+       while(node != null){
+           sum+=node.data;
+           node=node.previous;
+       }
+       return sum;
+   }
+   public int sumOfLastElements(int x){
+      int sum = 0;
+      int count = 0;//as long as counter is less than n then it is good
+      Node node = tail;
+      while (node != null) {
+         count++;
+        if(count <= x)
+        {sum+=node.data;
+      }
+        node=node.previous;
+   
+   }
+      return sum;
+   }
+   
+   //how to clone one list to another
+   
+ public int size(){
+       return size;
+}
+ 
+ public int max(){    
+    Node nd = head;
+    int max = nd.data;
+    while (nd!=null){
+        if(nd.data>max){
+            max=nd.data;
+        }
+        nd=nd.next;
+    }
+    return max;
+ }
+ public int min(){   
+    Node nd = head;
+    int min = nd.data;
+    while (nd!=null){
+        if(nd.data<min){
+            min=nd.data;
+        }
+        nd=nd.next;
+    }
+    return min;
+ }
 }

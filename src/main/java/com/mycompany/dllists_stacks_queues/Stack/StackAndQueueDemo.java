@@ -14,7 +14,9 @@ public class StackAndQueueDemo {
       for (int number : numbers) {
           numStack.push(number);
       }
-
+      //numStack.pop();
+       System.out.println("Is the stack empty: " + numStack.isEmpty());
+       System.out.println("Size of the stack: " + numStack.getSize());
       // Output stack
       System.out.print("Stack after initial pushes:   ");
       numStack.print();
@@ -38,7 +40,8 @@ public class StackAndQueueDemo {
       for (int number : numbers) {
           numQueue.enqueue(number);
       }
-
+       System.out.println("Size of the queue: " + numQueue.isEmpty());
+       System.out.println("Size of the queue: " + numQueue.getSize());
       // Output queue
       System.out.print("Queue after initial enqueues: ");
       numQueue.print();
@@ -57,5 +60,23 @@ public class StackAndQueueDemo {
       numQueue.dequeue();
       System.out.print("Queue after second dequeue:   ");
       numQueue.print();
+      //reverse the order of the characters using stack
+      String str = "CSC229"; //output 922CSC
+       System.out.println("The reverse order of CSC229 is " +reverse(str));
+   }
+   public static String reverse(String s){
+       char[] rs=new char[s.length()];
+       Stack st = new Stack();
+       //traversing the String and pushing the characters of the String int the st one by one
+       for (int i = 0; i < s.length(); i++) {
+           //pushing characters into st
+           st.push(s.charAt(i));
+       }
+        //now pop characters from the st until st becomes empty
+        int j=0;
+        while(!st.isEmpty()){
+            rs[j++]=(char) st.pop();
+           }
+        return new String(rs);
    }
 }

@@ -7,6 +7,7 @@ package com.mycompany.dllists_stacks_queues.Stack;
  */
 class Queue {
    private LinkedList linkedList;
+   private int size;
     
    Queue() {
       linkedList = new LinkedList();
@@ -30,7 +31,14 @@ class Queue {
       // Return dequeued item
       return dequeuedItem;
    }
-   
+   public boolean isEmpty(){
+       if(linkedList.getSize()==0)
+           return true;
+       return false;
+   }
+   public int getSize(){
+       return linkedList.getSize();
+   }
    public void print() {
       linkedList.printList();
    }

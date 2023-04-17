@@ -7,7 +7,7 @@ package com.mycompany.dllists_stacks_queues.Stack;
  */
 class Stack {
    private LinkedList linkedList;
-    
+   private int size; 
    Stack() {
       linkedList = new LinkedList();
    }
@@ -28,8 +28,16 @@ class Stack {
       // Return popped item
       return poppedItem;
    }
-   
+   public boolean isEmpty(){
+       if(linkedList.getSize() == 0)
+           return true;
+       return false;
+   }
+   public int getSize(){
+       return linkedList.getSize();
+   }
    public void print() {
       linkedList.printList();
    }
 }
+
